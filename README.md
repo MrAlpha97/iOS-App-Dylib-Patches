@@ -46,6 +46,8 @@ git submodule update --init --recursive
 
 **Compile:**
 ```bash
+# One-time configure (creates build-cmake/, safe to re-run)
+cmake -B build-cmake
 # Everything in CMakeLists.txt
 cmake --build build-cmake
 # Just TelegramBypassSecureEntry
