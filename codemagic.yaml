@@ -9,20 +9,15 @@ workflows:
       xcode: latest
 
     scripts:
-      - name: Initialize Git submodules
-        script: |
-          git submodule update --init --recursive
+      - name: Initialize submodules
+        script: git submodule update --init --recursive
 
-      - name: Configure iOS ARM64 build
-        script: |
-          cmake -B build-cmake -DCMAKE_BUILD_TYPE=Release
+      - name: Configure build
+        script: cmake -B build-cmake
 
-      - name: Compile required dylibs
-        script: |
-          cmake --build build-cmake \
-            --config Release \
-            --target WhatsAppDisableSiriEntitlement NetworkLoader \
-            --parallel 4
+      - name: Compile
+        script: cmake --build build-cmake --parallel 4
 
     artifacts:
-      - build/*.dylib
+      - build-cmake/**/*.dylib
+      - build/**/*.dylib
